@@ -2,6 +2,7 @@ from app.Entities.User import User
 from app.Entities.Client import Client
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 from langserve import CustomUserType, add_routes
 from langchain_core.runnables import RunnableLambda
 from langchain_community.document_loaders.parsers.pdf import PDFMinerParser
@@ -15,6 +16,20 @@ from langchain.output_parsers import PydanticOutputParser
 
 llm = Ollama(model="llama3.2")
 app = FastAPI()
+
+origins = [
+"http://localhost:3000"
+"https://edc-ai.galaxbiotech.com",
+"http://localhost:3001"
+]
+
+app.add_middleware(
+CORSMiddleware,
+allow_origins=origins,
+allow_credentials=True,
+allow_methods=["*"],
+allow_headers=["*"],
+)
 
 @app.get("/")
 async def redirect_root_to_docs():
