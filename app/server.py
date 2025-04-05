@@ -117,7 +117,7 @@ async def add_cors_headers(request, call_next):
     return response
 
 origins = [
-"http://localhost:3000"
+"http://localhost:3000",
 "https://edc-ai.galaxbiotech.com",
 "http://localhost:3001"
 ]
