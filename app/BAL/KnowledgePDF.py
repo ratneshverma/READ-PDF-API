@@ -113,7 +113,7 @@ def ReadAWSOCRPDFContent(output_file):
         raise Exception("Text detection failed!")
 
 def ReadOCRPDFContent(output_file):
-    #images = convert_from_path(output_file, poppler_path=r"poppler\poppler-24.08.0\Library\bin", dpi=300)
+    # images = convert_from_path(output_file, poppler_path=r"poppler\poppler-24.08.0\Library\bin", dpi=300)
     images = convert_from_path(output_file, poppler_path=r"/usr/bin/", dpi=300)
     enhanced_images = []
     image_file_list = []
@@ -256,7 +256,7 @@ def knowledgePDF_base(request: KnowledgePDFRequest) -> str:
                 birthDateStr = birthDateStr[0:2] + '-' + birthDateStr[2:5] + '-' + birthDateStr[5:9]
             res.birth_date = birthDateStr
 
-            #SaveDemographicVectors(demo, sitename, subjectname, vistname, formname)
+            SaveDemographicVectors(res, sitename, subjectname, vistname, formname)
 
             print(res.model_dump_json())
             return res.model_dump_json()
@@ -283,7 +283,7 @@ def knowledgePDF_base(request: KnowledgePDFRequest) -> str:
             if request.visit != "None":
                 vistname = request.visit
             # res = RAGDemographic(raw_file_data)
-            #SaveDemographicVectors(res, sitename, subjectname, vistname, formname)
+            SaveDemographicVectors(demo, sitename, subjectname, vistname, formname)
             
             print(demo.model_dump_json())
             return demo.model_dump_json()
