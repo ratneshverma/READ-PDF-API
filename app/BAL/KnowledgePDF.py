@@ -41,9 +41,6 @@ vector_store = FAISS(
 )
 
 
-# Initialize S3 and Textract clients
-
-
 class KnowledgePDFRequest(CustomUserType):
     file: str = Field(..., extra={"widget": {"type": "base64file"}})
     site: str = "None"
@@ -116,7 +113,8 @@ def ReadAWSOCRPDFContent(output_file):
         raise Exception("Text detection failed!")
 
 def ReadOCRPDFContent(output_file):
-    images = convert_from_path(output_file, poppler_path=r"poppler\poppler-24.08.0\Library\bin", dpi=300)
+    #images = convert_from_path(output_file, poppler_path=r"poppler\poppler-24.08.0\Library\bin", dpi=300)
+    images = convert_from_path(output_file, poppler_path=r"/usr/bin/", dpi=300)
     enhanced_images = []
     image_file_list = []
     for img in images:
